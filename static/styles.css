@@ -1,0 +1,75 @@
+html,
+body {
+    height: 100%;
+    --primary: rgb(72, 172, 172);
+    --border-radius: 15px;
+    background-image: url('background.jpg');
+    background-size: cover;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(245, 245, 245);
+}
+
+.box {
+    border-radius: 15px;
+    flex-direction: column;
+    padding: 20px;
+    margin: 25px;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px rgb(224, 224, 224);
+}
+
+button {
+    background-image: url('background.jpg');
+    background-size: cover;
+    border-radius: 8px;
+    padding: 10px;
+    border: none;
+    font-weight: bold;
+    color: white;
+    margin-top: 15px;
+    margin-left: 75px;
+    width : 120px;
+}
+
+form {
+    /* background-color: white; */
+    border-radius: var(--border-radius);
+    /* padding-top: 4em; */
+}
+
+p {
+    padding-top: 3em;
+}
+.cadre {
+    width: 224px; /* Largeur du cadre */
+    height: 224px; /* Hauteur du cadre */
+    border: 2px dashed #ccc; /* Bordure en pointillés grise */
+    text-align: center; /* Centrer le texte */
+    padding: 20px; /*Espacement intérieur du cadre*/
+  }
+  
+  .cadre img {
+    max-width: 100%; /* Empêcher l'image de dépasser la largeur du cadre */
+    max-height: 100%; /* Empêcher l'image de dépasser la hauteur du cadre */
+  }
+  
+  .cadre p {
+    margin-top: 20px; /* Espacement entre l'image et le texte */
+  }
+  

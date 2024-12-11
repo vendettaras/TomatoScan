@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TomatoScan</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="compress box">
+        <h1>TomatoScan</h1>
+        <form id="uploadForm" action="/predict" method="post" enctype="multipart/form-data">
+            <div id="dropArea" class="cadre">
+                <p>Glissez et déposez votre photo ici</p>
+            </div>
+            <button type="submit">Vérifier</button>
+        </form>
+        {% if results_str %}
+        <h4><pre>{{results_str.results_str}}</pre></h4>
+        {% endif  %}
+    </div>
+      
+</body>
+
+<script>
+    // JavaScript
+    var dropArea = document.getElementById('dropArea');
+    var submitButton = document.getElementById('submitButton');
+    
+    // Empêcher le comportement par défaut pour le glisser-déposer
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false)
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    // Gérer les fichiers déposés
+    dropArea.addEventListener('drop', function(e) {
+        var fileList = e.dataTransfer.files;
+    
+        // Mettre à jour l'interface utilisateur pour montrer les fichiers déposés
+        dropArea.innerHTML = '';
+        for (var i = 0; i < fileList.length; i++) {
+            var img = document.createElement('img');
+            img.src = URL.createObjectURL(fileList[i]);
+            img.height = 100;
+            img.onload = function() {
+                URL.revokeObjectURL(this.src);
+            };
+            dropArea.appendChild(img);
+        }
+    
+        // Créer un champ de fichier virtuel et y affecter les fichiers déposés
+        var fileInput = document.createElement('input');
+        fileInput.type = 'file';
+        fileInput.name = 'image';
+        fileInput.style.display = 'none';
+        fileInput.files = fileList;
+        dropArea.appendChild(fileInput);
+    }, false);
+    
+    // Gérer le clic sur le bouton de vérification
+    submitButton.addEventListener('click', function() {
+        // Soumettre le formulaire lorsque le bouton de vérification est cliqué
+        document.getElementById('uploadForm').submit();
+    });
+</script>
+</html>
